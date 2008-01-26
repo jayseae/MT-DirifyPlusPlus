@@ -6,27 +6,33 @@
 #   2) Provide option "a(x)" to leave untouched
 #   3) Process default option of "xlu"
 # ===========================================================================
+package MT::Plugin::DirifyPlusPlus;
+
 use strict;
+
+use base qw( MT::Plugin );
 
 use MT;
 use MT::Template::Context;
+use MT::Util qw(convert_high_ascii remove_html);
 
 # version
 use vars qw($VERSION);
-$VERSION = '1.5.3';
+$VERSION = '1.5.4';
 
-my $about = {
-  name => 'MT-DirifyPlusPlus',
-  description => 'A global filter to enhance dirify options.',
+my $plugin = MT::Plugin::DirifyPlusPlus->new({
+  id          => 'DirifyPlusPlus',
+  key         => 'dirifyplusplus',
+  name        => 'MT-DirifyPlusPlus',
+  description => qq(<MT_TRANS phrase="A global filter to enhance dirify options.">),
   author_name => 'Everitz Consulting',
   author_link => 'http://everitz.com/',
-  version => $VERSION,
-};
-MT->add_plugin(new MT::Plugin($about));
+  version     => $VERSION,
+});
+MT->add_plugin($plugin);
 
 MT::Template::Context->add_global_filter(dirifyplus => sub
  {
-   use MT::Util qw( remove_html convert_high_ascii);
    my $t = $_[1];
    my $a = substr($t, 0, 1);
    my ($b, $c);
