@@ -1,17 +1,32 @@
-## DirifyPlus ver (1.5) by Crys Clouse
+# ===========================================================================
+# DirifyPlus ver (1.5) by CrysClouse
 #
-# Modified by Chad Everett ( http://jayseae.cxliv.org/ )
-# to
+# Modifications by Everitz Consulting
 #   1) Leave decimals and hyphens in the string
 #   2) Provide option "x" to leave things as-is
-
+# ===========================================================================
 use strict;
+
+use MT;
 use MT::Template::Context;
+
+# version
+use vars qw($VERSION);
+$VERSION = '1.5.2';
+
+my $about = {
+  name => 'MT-DirifyPlusPlus',
+  description => 'A global filter to enhance dirify options.',
+  author_name => 'Everitz Consulting',
+  author_link => 'http://everitz.com/',
+  version => $VERSION,
+};
+MT->add_plugin(new MT::Plugin($about));
 
 MT::Template::Context->add_global_filter(dirifyplus => sub
  {
    use MT::Util qw( remove_html convert_high_ascii);
-   my $t = $_[1]; 
+   my $t = $_[1];
    my $a = substr($t, 0, 1);
    my $b = substr($t, 1, 1);
    my $c = substr($t, 2, 1);
@@ -25,7 +40,7 @@ MT::Template::Context->add_global_filter(dirifyplus => sub
 
    if ($b eq "l")
     {
-    $s =  lc $s;;               ## lower-case.   
+    $s =  lc $s;;               ## lower-case.
     }
    elsif ($b eq "s")
     {
@@ -33,7 +48,7 @@ MT::Template::Context->add_global_filter(dirifyplus => sub
     }
    elsif ($b eq "i")
     {
-    $s =  lc $s;;               ## lower-case.   
+    $s =  lc $s;;               ## lower-case.
     $s =~ s!(\b.)!\U$1!g;       ## captialize words
     }
    elsif ($b eq "c")
@@ -70,7 +85,7 @@ MT::Template::Context->add_global_filter(dirifyplus => sub
 
    if (($c eq "u") || (!$c))
     {
-    $s =~ tr! !_!s;             ## change space chars to underscores.   
+    $s =~ tr! !_!s;             ## change space chars to underscores.
     }
    elsif ($c eq "n")
     {
@@ -80,5 +95,5 @@ MT::Template::Context->add_global_filter(dirifyplus => sub
     {
     $s =~ tr! !-!s;             ## change space chars to dashes.
     }
-  $s; 
+  $s;
 });
