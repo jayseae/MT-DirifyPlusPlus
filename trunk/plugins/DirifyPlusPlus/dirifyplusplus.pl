@@ -3,7 +3,8 @@
 #
 # Modifications by Everitz Consulting
 #   1) Leave decimals and hyphens in the string
-#   2) Provide option "x" to leave things as-is
+#   2) Provide option "a(x)" to leave untouched
+#   3) Process default option of "xlu"
 # ===========================================================================
 use strict;
 
@@ -12,7 +13,7 @@ use MT::Template::Context;
 
 # version
 use vars qw($VERSION);
-$VERSION = '1.5.2';
+$VERSION = '1.5.3';
 
 my $about = {
   name => 'MT-DirifyPlusPlus',
@@ -28,8 +29,15 @@ MT::Template::Context->add_global_filter(dirifyplus => sub
    use MT::Util qw( remove_html convert_high_ascii);
    my $t = $_[1];
    my $a = substr($t, 0, 1);
-   my $b = substr($t, 1, 1);
-   my $c = substr($t, 2, 1);
+   my ($b, $c);
+   if ($a eq '1') {
+     $a = 'x';
+     $b = 'l';
+     $c = 'u';
+   } else {
+     $b = substr($t, 1, 1);
+     $c = substr($t, 2, 1);
+   }
 
    my $s = $_[0];
 
