@@ -1,10 +1,17 @@
 # ===========================================================================
-# DirifyPlus ver (1.5) by CrysClouse
+# A Movable Type global filter to enhance dirify options.
+# Copyright 2004, 2005 Everitz Consulting <everitz.com>, Crys Clouse.
 #
-# Modifications by Everitz Consulting
-#   1) Leave decimals and hyphens in the string
-#   2) Provide option "a(x)" to leave untouched
-#   3) Process default option of "xlu"
+# This program is free software:  You may redistribute it and/or modify it
+# it under the terms of the Artistic License version 2 as published by the
+# Open Source Initiative.
+#
+# This program is distributed in the hope that it will be useful but does
+# NOT INCLUDE ANY WARRANTY; Without even the implied warranty of FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+# You should have received a copy of the Artistic License with this program.
+# If not, see <http://www.opensource.org/licenses/artistic-license-2.0.php>.
 # ===========================================================================
 package MT::Plugin::DirifyPlusPlus;
 
@@ -18,7 +25,7 @@ use MT::Util qw(convert_high_ascii remove_html);
 
 # version
 use vars qw($VERSION);
-$VERSION = '1.5.4';
+$VERSION = '1.5.5';
 
 my $plugin = MT::Plugin::DirifyPlusPlus->new({
   id          => 'DirifyPlusPlus',
